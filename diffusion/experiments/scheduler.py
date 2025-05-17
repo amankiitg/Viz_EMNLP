@@ -54,7 +54,8 @@ def run(manager: ExperimentManager):
 
             # Create a fresh model
             from diffusion.model import create_model
-            model = create_model(**vars(manager.config))
+            # model = create_model(**vars(manager.config))
+            model = create_model(manager.config.image_size)
 
             # Setup scheduler
             noise_scheduler = noise_scheduler_class(num_train_timesteps=1000)

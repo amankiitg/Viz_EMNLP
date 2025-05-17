@@ -76,7 +76,7 @@ def run(manager: ExperimentManager):
 
         # Create fresh model for each experiment
         from diffusion.model import create_model
-        model = create_model(**vars(manager.config))
+        model = create_model(manager.config.image_size)
 
         run_and_save_experiment(
             manager,

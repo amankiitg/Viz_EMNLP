@@ -30,7 +30,8 @@ def run(manager: ExperimentManager):
             # cfg.output_dir  = f"exp3/lr{lr}_ep{ep}"
 
             # --- fresh model instance ---
-            model = create_model(cfg)
+            model = create_model(cfg.image_size)
+            # model = create_model(manager.config.image_size)
 
             # --- create a fresh optimizer for this experiment ---
             optimizer = AdamW(model.parameters(), lr=cfg.learning_rate)
