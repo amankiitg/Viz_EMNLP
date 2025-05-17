@@ -1,0 +1,6 @@
+torch
+diffusers
+accelerate
+pandas
+numpy
+scikit-learn

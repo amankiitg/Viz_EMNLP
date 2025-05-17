@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: viz-emnlp
+Version: 0.0.1
+Summary: Diffusion-model experiments for EMNLP visualizations
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
+# Viz_EMNLP
+
+Light-weight Python package for diffusion experiments.
+
+## Quick start (Google Colab)
+
+```python
+!git clone https://github.com/amankiitg/Viz_EMNLP.git
+%cd Viz_EMNLP
+!pip install .
