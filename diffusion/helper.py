@@ -132,7 +132,6 @@ def run_and_save_experiment(
         args,
         num_processes=1,
         mixed_precision="fp16",
-        device_placement=True  # Explicit device placement
     )
     notebook_launcher(train_loop, args, num_processes=num_processes, mixed_precision="fp16" )
 
