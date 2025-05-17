@@ -69,7 +69,7 @@ def run(manager: ExperimentManager):
 
         run_and_save_experiment(
             manager,
-            exp_name="exp1",
+            exp_name="min_data",
             test_name=test_name,
             dataloader=dl,
         )

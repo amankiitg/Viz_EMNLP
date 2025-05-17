@@ -45,7 +45,7 @@ def run(manager: ExperimentManager):
 
     run_and_save_experiment(
         manager,
-        exp_name="exp3",
+        exp_name="attention",
         test_name="no_attention",
         model=model_no_attn,
     )
@@ -80,7 +80,7 @@ def run(manager: ExperimentManager):
 
     run_and_save_experiment(
         manager,
-        exp_name="exp3",
+        exp_name="attention",
         test_name="with_attention",
         model=model_attn,
     )

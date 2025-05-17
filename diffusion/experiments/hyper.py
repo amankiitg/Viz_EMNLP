@@ -32,7 +32,7 @@ def run(manager: ExperimentManager):
             # --- hand off to shared utility ---
             run_and_save_experiment(
                 manager,
-                exp_name="exp3",
+                exp_name="hyperparams",
                 test_name=f"lr{lr}_ep{ep}",
                 model=model,
                 # let optimizer / schedulers default from manager
