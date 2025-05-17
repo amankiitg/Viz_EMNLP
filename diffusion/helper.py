@@ -142,7 +142,7 @@ def run_and_save_experiment(
 
     # Save sample grid
     base_path = config.output_dir
-    grid = make_grid(images, nrow=4)
+    grid = make_grid(images, rows=4, cols=4)
     grid_image = grid.permute(1, 2, 0).mul(255).byte().cpu().numpy()
     from PIL import Image
     Image.fromarray(grid_image).save(os.path.join(base_path, "samples.png"))

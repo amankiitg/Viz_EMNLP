@@ -10,9 +10,9 @@ from torch.utils.data import Dataset, DataLoader
 import re
 
 class EgyptianCharacterDataset(Dataset):
-    def __init__(self, image_dir, angle_range=None, transform=None):
+    def __init__(self, image_dir, angle_range=None, transform_=None):
         self.image_dir = image_dir
-        self.transform = transform
+        self.transform = transform_
         self.image_paths = self._select_images(angle_range)
 
     def _select_images(self, angle_range):
@@ -52,9 +52,9 @@ def run(manager: ExperimentManager):
     angles_small = list(range(-5, 6, 5))
     angles_large = list(range(-15, 16, 5))
 
-    dataset_none = EgyptianCharacterDataset("data", angle_range=angles_none, transform=transform)
-    dataset_small = EgyptianCharacterDataset("data", angle_range=angles_small, transform=transform)
-    dataset_large = EgyptianCharacterDataset("data", angle_range=angles_large, transform=transform)
+    dataset_none = EgyptianCharacterDataset("data", angle_range=angles_none, transform_=transform)
+    dataset_small = EgyptianCharacterDataset("data", angle_range=angles_small, transform_=transform)
+    dataset_large = EgyptianCharacterDataset("data", angle_range=angles_large, transform_=transform)
 
     dataloader_none = DataLoader(dataset_none, batch_size=manager.config.train_batch_size, shuffle=True)
     dataloader_small = DataLoader(dataset_small, batch_size=manager.config.train_batch_size, shuffle=True)

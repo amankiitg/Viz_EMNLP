@@ -48,7 +48,6 @@ def run(manager: ExperimentManager):
         exp_name="exp3",
         test_name="no_attention",
         model=model_no_attn,
-        config=config_no_attn,
     )
 
     # ---- 2. UNet with attention ----
@@ -84,5 +83,4 @@ def run(manager: ExperimentManager):
         exp_name="exp3",
         test_name="with_attention",
         model=model_attn,
-        config=config_attn,
     )

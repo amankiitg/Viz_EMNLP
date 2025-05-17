@@ -1,0 +1,12 @@
+setuptools~=68.2.0
+torchvision~=0.22.0
+pathlib~=1.0.1
+pillow~=11.2.1
+diffusers~=0.33.1
+torch~=2.7.0
+accelerate~=1.7.0
+tqdm~=4.67.1
+numpy~=2.0.2
+pandas~=2.2.3
+fitz~=0.0.1.dev2
+transformers~=4.51.3
