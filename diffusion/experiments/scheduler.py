@@ -1,10 +1,9 @@
 
 """# Scheduler"""
-import os
 
-from diffusers import DDPMScheduler, DDIMScheduler, DDPMPipeline
-from transformers import get_scheduler
 import torch
+from diffusers import DDPMScheduler, DDIMScheduler
+from transformers import get_scheduler
 
 from diffusion.helper import run_and_save_experiment
 from diffusion.main import TrainingConfig, ExperimentManager
