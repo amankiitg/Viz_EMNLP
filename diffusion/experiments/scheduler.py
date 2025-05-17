@@ -41,12 +41,12 @@ def run(manager: ExperimentManager):
 
             # Load model saved from epoch 9 of prior training
             # model_dir = os.path.join(config.output_dir, "epoch9")
-            pipeline = create_model(**vars(manager.config))
+            model = create_model(**vars(manager.config))
 
             # Setup scheduler
             noise_scheduler = noise_scheduler_class(num_train_timesteps=1000)
 
-            dummy_optimizer = torch.optim.Adam(pipeline.unet.parameters(), lr=config.learning_rate)
+            dummy_optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
             total_steps = len(manager.train_dataloader) * config.num_epochs
             lr_scheduler = get_scheduler(
                 name=lr_scheduler_type,
@@ -59,7 +59,7 @@ def run(manager: ExperimentManager):
 
             run_and_save_experiment(
                 manager,
-                model=pipeline.unet,
+                model=model,
                 exp_name="scheduler",
                 test_name=f"{noise_schedule_name}_{lr_scheduler_type}",
                 noise_scheduler=noise_scheduler,
