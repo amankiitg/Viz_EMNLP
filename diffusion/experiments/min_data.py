@@ -1,3 +1,8 @@
+from diffusion.helper import run_and_save_experiment
+from diffusion.main import ExperimentManager
+
+"""# Research Minimum Dataset"""
+
 import os
 from PIL import Image
 from torchvision import transforms
@@ -13,7 +18,7 @@ class EgyptianCharacterDataset(Dataset):
     def _select_images(self, angle_range):
         images = os.listdir(self.image_dir)
         if angle_range is None:
-            return [os.path.join(self.image_dir, img) for img in images if not re.search(r"_[-]?\d+deg_rotated", img)]
+            return [os.path.join(self.image_dir, img) for img in images if not re.search(r"_-?\d+deg_rotated", img)]
         else:
             angles = set(f"{angle}deg_rotated" for angle in angle_range)
             return [
@@ -41,38 +46,31 @@ transform = transforms.Compose([
     transforms.Lambda(lambda x: x * 2 - 1)
 ])
 
-# Variants
-angles_none = None
-angles_small = list(range(-5, 6, 5))
-angles_large = list(range(-15, 16, 5))
+def run(manager: ExperimentManager):
+    # Variants
+    angles_none = None
+    angles_small = list(range(-5, 6, 5))
+    angles_large = list(range(-15, 16, 5))
 
-dataset_none = EgyptianCharacterDataset("data", angle_range=angles_none, transform=transform)
-dataset_small = EgyptianCharacterDataset("data", angle_range=angles_small, transform=transform)
-dataset_large = EgyptianCharacterDataset("data", angle_range=angles_large, transform=transform)
+    dataset_none = EgyptianCharacterDataset("data", angle_range=angles_none, transform=transform)
+    dataset_small = EgyptianCharacterDataset("data", angle_range=angles_small, transform=transform)
+    dataset_large = EgyptianCharacterDataset("data", angle_range=angles_large, transform=transform)
 
-dataloader_none = DataLoader(dataset_none, batch_size=config.train_batch_size, shuffle=True)
-dataloader_small = DataLoader(dataset_small, batch_size=config.train_batch_size, shuffle=True)
-dataloader_large = DataLoader(dataset_large, batch_size=config.train_batch_size, shuffle=True)
+    dataloader_none = DataLoader(dataset_none, batch_size=manager.config.train_batch_size, shuffle=True)
+    dataloader_small = DataLoader(dataset_small, batch_size=manager.config.train_batch_size, shuffle=True)
+    dataloader_large = DataLoader(dataset_large, batch_size=manager.config.train_batch_size, shuffle=True)
 
-for test_name, dl in {
-    "dataset_none": dataloader_none,
-    "dataset_small": dataloader_small,
-    "dataset_large": dataloader_large,
-}.items():
-    print(f"Starting experiment: {test_name}")
+    for test_name, dl in {
+        "dataset_none": dataloader_none,
+        "dataset_small": dataloader_small,
+        "dataset_large": dataloader_large,
+    }.items():
+        print(f"Starting experiment: {test_name}")
 
-    run_and_save_experiment(
-        exp_name="exp1",
-        test_name=test_name,
-        config=config,
-        model=model,
-        noise_scheduler=noise_scheduler,
-        optimizer=optimizer,
-        dataloader=dl,
-        lr_scheduler=lr_scheduler,
-        train_loop=train_loop,
-        make_labeled_grid=make_labeled_grid,
-        create_process_grid=create_process_grid,
-        font_path="NotoSansEgyptianHieroglyphs-Regular.ttf"  # Or any available path
-    )
+        run_and_save_experiment(
+            manager,
+            exp_name="exp1",
+            test_name=test_name,
+            dataloader=dl,
+        )
 
