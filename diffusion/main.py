@@ -73,6 +73,7 @@ class ExperimentManager:
         else:
             self.config = smokeConfig
         self.font_path = font_path#"NotoSansEgyptianHieroglyphs-Regular.ttf"
+        self.data_path = data_path
 
         # ---------- data ----------
         self.dataset = LocalDataset(data_path, image_size=self.config.image_size)
@@ -99,7 +100,7 @@ class ExperimentManager:
     # ----------------------------------------
     # Experiment wrappers
     # ----------------------------------------
-    def run_min_data(self, data_path):
+    def run_min_data(self):
         from .experiments.min_data import run
         run(self)
 
