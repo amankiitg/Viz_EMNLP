@@ -46,15 +46,15 @@ transform = transforms.Compose([
     transforms.Lambda(lambda x: x * 2 - 1)
 ])
 
-def run(manager: ExperimentManager):
+def run(manager: ExperimentManager, data_path):
     # Variants
     angles_none = None
     angles_small = list(range(-5, 6, 5))
     angles_large = list(range(-15, 16, 5))
 
-    dataset_none = EgyptianCharacterDataset("data", angle_range=angles_none, transform_=transform)
-    dataset_small = EgyptianCharacterDataset("data", angle_range=angles_small, transform_=transform)
-    dataset_large = EgyptianCharacterDataset("data", angle_range=angles_large, transform_=transform)
+    dataset_none = EgyptianCharacterDataset(data_path, angle_range=angles_none, transform_=transform)
+    dataset_small = EgyptianCharacterDataset(data_path, angle_range=angles_small, transform_=transform)
+    dataset_large = EgyptianCharacterDataset(data_path, angle_range=angles_large, transform_=transform)
 
     dataloader_none = DataLoader(dataset_none, batch_size=manager.config.train_batch_size, shuffle=True)
     dataloader_small = DataLoader(dataset_small, batch_size=manager.config.train_batch_size, shuffle=True)

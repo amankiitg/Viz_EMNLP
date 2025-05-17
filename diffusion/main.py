@@ -69,7 +69,7 @@ class ExperimentManager:
     def __init__(self, data_path: str, font_path=None, smokeConfig=None):
         # ---------- configuration ----------
         if smokeConfig is None:
-            self.config = TrainingConfig(dataset_name=data_path)
+            self.config = TrainingConfig()
         else:
             self.config = smokeConfig
         self.font_path = font_path#"NotoSansEgyptianHieroglyphs-Regular.ttf"
@@ -99,7 +99,7 @@ class ExperimentManager:
     # ----------------------------------------
     # Experiment wrappers
     # ----------------------------------------
-    def run_min_data(self):
+    def run_min_data(self, data_path):
         from .experiments.min_data import run
         run(self)
 
