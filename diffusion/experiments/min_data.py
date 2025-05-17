@@ -52,8 +52,8 @@ transform = transforms.Compose([
 def run(manager: ExperimentManager):
     # Variants
     angles_none = None
-    angles_small = list(range(-5, 6, 5))
-    angles_large = list(range(-15, 16, 5))
+    angles_small = list(range(-15, 16, 5))
+    angles_large = list(range(-25, 26, 5))
 
     # Print dataset sizes for debugging
     dataset_none = EgyptianCharacterDataset(manager.data_path, angle_range=angles_none, transform_=transform)
