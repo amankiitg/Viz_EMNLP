@@ -126,7 +126,7 @@ def run_and_save_experiment(
     # Train model
     args = (config, model, noise_scheduler, optimizer, dataloader, lr_scheduler)
     from accelerate import notebook_launcher
-    notebook_launcher(train_loop, args, num_processes=num_processes)
+    notebook_launcher(train_loop, args, num_processes=num_processes, mixed_precision="fp16" )
 
     # Load model pipeline from final saved epoch
     model_dir = os.path.join(config.output_dir, f"epoch{config.num_epochs - 1}")
