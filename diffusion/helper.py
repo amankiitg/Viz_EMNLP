@@ -118,7 +118,7 @@ def run_and_save_experiment(
     lr_scheduler    = lr_scheduler    or manager.lr_scheduler
     dataloader      = dataloader      or manager.train_dataloader
     # Set output path for this experiment/test combo
-    config.output_dir = os.path.join("experiments", exp_name, test_name)
+    config.output_dir = os.path.join("/content/experiments", exp_name, test_name)
     os.makedirs(config.output_dir, exist_ok=True)
 
     font_path = manager.font_path

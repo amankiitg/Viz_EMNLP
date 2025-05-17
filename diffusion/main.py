@@ -62,7 +62,7 @@ class TrainingConfig:
     output_dir: str = "glyffuser-unconditional"
     overwrite_output_dir: bool = True
     seed: int = 0
-    dataset_name: str = "data"
+    dataset_name: str = "data128"
 
 
 class ExperimentManager:
