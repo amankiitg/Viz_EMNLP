@@ -66,12 +66,12 @@ class TrainingConfig:
 
 
 class ExperimentManager:
-    def __init__(self, data_path: str, font_path=None, smokeConfig=None):
+    def __init__(self, data_path: str, font_path=None, smoke_config=None):
         # ---------- configuration ----------
-        if smokeConfig is None:
+        if smoke_config is None:
             self.config = TrainingConfig()
         else:
-            self.config = smokeConfig
+            self.config = smoke_config
         self.font_path = font_path#"NotoSansEgyptianHieroglyphs-Regular.ttf"
         self.data_path = data_path
 
