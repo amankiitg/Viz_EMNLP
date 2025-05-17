@@ -39,8 +39,6 @@ def run(manager: ExperimentManager):
             config.num_epochs = default_epochs
             config.output_dir = f"scheduler_test/{noise_schedule_name}_{lr_scheduler_type}"
 
-            # Load model saved from epoch 9 of prior training
-            # model_dir = os.path.join(config.output_dir, "epoch9")
             model = create_model(**vars(manager.config))
 
             # Setup scheduler
