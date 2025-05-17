@@ -36,7 +36,9 @@ def run(manager: ExperimentManager):
             config = TrainingConfig(**vars(manager.config))
             config.learning_rate = default_lr
             config.num_epochs = default_epochs
-            config.output_dir = f"scheduler_test/{noise_schedule_name}_{lr_scheduler_type}"
+
+            # Let run_and_save_experiment set the output directory correctly
+            # Don't set config.output_dir here
 
             model = create_model(**vars(manager.config))
 
@@ -53,12 +55,11 @@ def run(manager: ExperimentManager):
             )
 
             # Evaluate using the experiment-specific noise and lr schedulers
-
             run_and_save_experiment(
                 manager,
                 model=model,
-                exp_name="scheduler",
-                test_name=f"{noise_schedule_name}_{lr_scheduler_type}",
+                exp_name="scheduler",  # This will be the top-level folder
+                test_name=f"{noise_schedule_name}_{lr_scheduler_type}",  # This will be the subfolder
                 noise_scheduler=noise_scheduler,
                 lr_scheduler=lr_scheduler,
                 # let optimizer default from manager

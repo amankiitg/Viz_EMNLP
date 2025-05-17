@@ -40,8 +40,8 @@ def run(manager: ExperimentManager):
         ),
     )
 
+    # No need to set config_no_attn.output_dir as it gets set by run_and_save_experiment
     config_no_attn = TrainingConfig(**vars(manager.config))
-    config_no_attn.output_dir = "attention/unet_no_attention"
 
     run_and_save_experiment(
         manager,
@@ -75,8 +75,8 @@ def run(manager: ExperimentManager):
         ),
     )
 
+    # No need to set config_attn.output_dir as it gets set by run_and_save_experiment
     config_attn = TrainingConfig(**vars(manager.config))
-    config_attn.output_dir = "attention/unet_attention"
 
     run_and_save_experiment(
         manager,
