@@ -64,41 +64,14 @@ class TrainingConfig:
     seed: int = 0
     dataset_name: str = "data"
 
-#Smoke Test
-@dataclass
-class TestConfig:
-    # Tiny images + tiny batch
-    image_size: int = 64          # 4× fewer pixels than 128×128
-    train_batch_size: int = 4     # fits easily on a single GPU
-    eval_batch_size: int = 4
-
-    # Minimal training
-    num_epochs: int = 1           # one pass over the data
-    gradient_accumulation_steps: int = 1
-
-    # Learning-rate / scheduler
-    learning_rate: float = 5e-4   # slightly higher to learn something in 1 epoch
-    lr_warmup_steps: int = 0      # skip warm-up for speed
-
-    # Checkpoint / image saving
-    save_image_epochs: int = 1    # still saves a grid to verify outputs
-    save_model_epochs: int = 1    # keeps a checkpoint after the single epoch
-
-    # Precision & misc
-    mixed_precision: str = "fp16" # halves memory
-    output_dir: str = "quick_test"
-    overwrite_output_dir: bool = True
-    seed: int = 42
-    dataset_name: str = "data_subset"  # point to a small sample (e.g., 100–500 images)
-
 
 class ExperimentManager:
-    def __init__(self, data_path: str, font_path=None, smoke=False):
+    def __init__(self, data_path: str, font_path=None, smokeConfig=None):
         # ---------- configuration ----------
-        if smoke:
+        if smokeConfig is None:
             self.config = TrainingConfig(dataset_name=data_path)
         else:
-            self.config = TestConfig(dataset_name=data_path)
+            self.config = smokeConfig
         self.font_path = font_path#"NotoSansEgyptianHieroglyphs-Regular.ttf"
 
         # ---------- data ----------
