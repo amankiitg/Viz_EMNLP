@@ -42,9 +42,9 @@ def run(manager: ExperimentManager):
             print(f"\n🧪 Experiment: {noise_schedule_name} + LR Scheduler: {lr_scheduler_type}")
 
             # Setup training config
-            config = TrainingConfig(**vars(manager.config))
-            config.learning_rate = default_lr
-            config.num_epochs = default_epochs
+            # config = TrainingConfig(**vars(manager.config))
+            # config.learning_rate = default_lr
+            # config.num_epochs = default_epochs
 
             # Let run_and_save_experiment set the output directory correctly
             # But keep the test name clear and consistent
@@ -59,14 +59,14 @@ def run(manager: ExperimentManager):
             noise_scheduler = noise_scheduler_class(num_train_timesteps=1000)
 
             # Create a custom optimizer with the experiment's learning rate
-            optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
+            optimizer = torch.optim.Adam(model.parameters(), lr=manager.config.learning_rate)
 
             # Create a custom LR scheduler
-            total_steps = len(manager.train_dataloader) * config.num_epochs
+            total_steps = len(manager.train_dataloader) * manager.config.num_epochs
             lr_scheduler = get_scheduler(
                 name=lr_scheduler_type,
                 optimizer=optimizer,
-                num_warmup_steps=config.lr_warmup_steps,
+                num_warmup_steps=manager.config.lr_warmup_steps,
                 num_training_steps=total_steps,
             )
 
@@ -82,6 +82,6 @@ def run(manager: ExperimentManager):
             )
 
             # Print the path where we should find the model after training
-            final_model_dir = os.path.join(experiment_output_dir, f"epoch{config.num_epochs - 1}")
+            final_model_dir = os.path.join(experiment_output_dir, f"epoch{manager.config.num_epochs - 1}")
             print(f"Model should be saved at: {final_model_dir}")
             print(f"Directory exists: {os.path.exists(final_model_dir)}")
