@@ -31,8 +31,8 @@ def evaluate(config, epoch, pipeline):
 
 def train_loop(config, model, noise_scheduler, optimizer, train_dataloader, lr_scheduler):
     accelerator = Accelerator(
-        mixed_precision="no",
-        # mixed_precision=config.mixed_precision,
+        # mixed_precision="no",
+        mixed_precision=config.mixed_precision,
         gradient_accumulation_steps=config.gradient_accumulation_steps,
         log_with="tensorboard",
         project_dir=os.path.join(config.output_dir, "logs")
