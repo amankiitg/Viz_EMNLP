@@ -8,6 +8,7 @@ import torch
 
 from diffusion.helper import run_and_save_experiment
 from diffusion.main import TrainingConfig, ExperimentManager
+from diffusion.model import create_model
 
 
 def run(manager: ExperimentManager):
@@ -36,11 +37,11 @@ def run(manager: ExperimentManager):
             config = TrainingConfig(**vars(manager.config))
             config.learning_rate = default_lr
             config.num_epochs = default_epochs
-            config.output_dir = f"exp4_scheduler_test/{noise_schedule_name}_{lr_scheduler_type}"
+            config.output_dir = f"scheduler_test/{noise_schedule_name}_{lr_scheduler_type}"
 
             # Load model saved from epoch 9 of prior training
-            model_dir = os.path.join(config.output_dir, "epoch9")
-            pipeline = DDPMPipeline.from_pretrained(model_dir)
+            # model_dir = os.path.join(config.output_dir, "epoch9")
+            pipeline = create_model(**vars(manager.config))
 
             # Setup scheduler
             noise_scheduler = noise_scheduler_class(num_train_timesteps=1000)

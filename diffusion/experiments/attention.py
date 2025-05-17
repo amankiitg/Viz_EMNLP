@@ -41,7 +41,7 @@ def run(manager: ExperimentManager):
     )
 
     config_no_attn = TrainingConfig(**vars(manager.config))
-    config_no_attn.output_dir = "exp3/unet_no_attention"
+    config_no_attn.output_dir = "attention/unet_no_attention"
 
     run_and_save_experiment(
         manager,
@@ -76,7 +76,7 @@ def run(manager: ExperimentManager):
     )
 
     config_attn = TrainingConfig(**vars(manager.config))
-    config_attn.output_dir = "exp3/unet_attention"
+    config_attn.output_dir = "attention/unet_attention"
 
     run_and_save_experiment(
         manager,
