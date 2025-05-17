@@ -126,6 +126,14 @@ def run_and_save_experiment(
     # Train model
     args = (config, model, noise_scheduler, optimizer, dataloader, lr_scheduler)
     from accelerate import notebook_launcher
+    torch.cuda.set_device(0)
+    notebook_launcher(
+        train_loop,
+        args,
+        num_processes=1,
+        mixed_precision="fp16",
+        device_placement=True  # Explicit device placement
+    )
     notebook_launcher(train_loop, args, num_processes=num_processes, mixed_precision="fp16" )
 
     # Load model pipeline from final saved epoch

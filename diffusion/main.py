@@ -44,6 +44,10 @@ class LocalDataset(Dataset):
 
     def __getitem__(self, index):
         path = self.paths[index]
+        # Add validation
+        if self.paths[index] is None:
+            raise ValueError(f"Invalid data at index {index}")
+
         img = Image.open(path).convert('L')  # Grayscale
         return self.transform(img)
 

@@ -6,6 +6,8 @@ from PIL import Image
 from accelerate import Accelerator
 from diffusers import DDPMPipeline, DPMSolverMultistepScheduler
 from tqdm.auto import tqdm
+# Add gradient scaling and clipping
+from torch.cuda.amp import GradScaler
 
 def make_grid(images, rows, cols):
     # Helper function for making a grid of images
