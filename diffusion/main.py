@@ -59,7 +59,7 @@ class TrainingConfig:
     save_image_epochs: int = 1
     save_model_epochs: int = 10
     mixed_precision: str = "fp16"
-    output_dir: str = "glyffuser-unconditional"
+    output_dir: str = None
     overwrite_output_dir: bool = True
     seed: int = 0
     dataset_name: str = "data128"

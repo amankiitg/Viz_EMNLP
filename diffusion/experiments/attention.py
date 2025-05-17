@@ -40,9 +40,6 @@ def run(manager: ExperimentManager):
         ),
     )
 
-    # No need to set config_no_attn.output_dir as it gets set by run_and_save_experiment
-    config_no_attn = TrainingConfig(**vars(manager.config))
-
     run_and_save_experiment(
         manager,
         exp_name="attention",
@@ -74,9 +71,6 @@ def run(manager: ExperimentManager):
             "UpBlock2D",
         ),
     )
-
-    # No need to set config_attn.output_dir as it gets set by run_and_save_experiment
-    config_attn = TrainingConfig(**vars(manager.config))
 
     run_and_save_experiment(
         manager,
