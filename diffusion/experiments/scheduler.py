@@ -1,13 +1,11 @@
 import os
 
-import torch
 from diffusers import DDPMScheduler, DDIMScheduler
+from torch.optim import AdamW
 from transformers import get_scheduler
 
 from diffusion.helper import run_and_save_experiment
 from diffusion.main import ExperimentManager
-from diffusion.model import create_model
-from torch.optim import AdamW
 
 
 def run(manager: ExperimentManager):
@@ -55,6 +53,7 @@ def run(manager: ExperimentManager):
             print(f"Expected output directory will be: {experiment_output_dir}")
 
             # Create a fresh model
+            from diffusion.model import create_model
             model = create_model(**vars(manager.config))
 
             # Setup scheduler
