@@ -1,17 +1,19 @@
-import torch
 import os
+
+import torch
 from diffusers import DDPMScheduler, DDIMScheduler
 from transformers import get_scheduler
 
 from diffusion.helper import run_and_save_experiment
-from diffusion.main import TrainingConfig, ExperimentManager
+from diffusion.main import ExperimentManager
 from diffusion.model import create_model
+from torch.optim import AdamW
 
 
 def run(manager: ExperimentManager):
     # Fixed configuration
-    default_lr = 1e-4
-    default_epochs = 10
+    # default_lr = 1e-4
+    # default_epochs = 10
 
     # Variants to test
     scheduler_variants = [
@@ -59,7 +61,7 @@ def run(manager: ExperimentManager):
             noise_scheduler = noise_scheduler_class(num_train_timesteps=1000)
 
             # Create a custom optimizer with the experiment's learning rate
-            optimizer = torch.optim.Adam(model.parameters(), lr=manager.config.learning_rate)
+            optimizer = AdamW(model.parameters(), lr=manager.config.learning_rate)
 
             # Create a custom LR scheduler
             total_steps = len(manager.train_dataloader) * manager.config.num_epochs
@@ -77,8 +79,8 @@ def run(manager: ExperimentManager):
                 optimizer=optimizer,
                 exp_name="scheduler",  # This will be the top-level folder
                 test_name=test_name,  # The subfolder for this specific experiment
-                noise_scheduler=noise_scheduler,
-                lr_scheduler=lr_scheduler,
+                # noise_scheduler=noise_scheduler,
+                # lr_scheduler=lr_scheduler,
             )
 
             # Print the path where we should find the model after training
